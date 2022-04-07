@@ -6,7 +6,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 
-security = "high"
+security = "low"
 password_file = "/tmp/fasttrack.txt"
 url="http://192.168.1.163:8082/vulnerabilities/brute/"
 
@@ -15,7 +15,7 @@ with open(password_file, 'r') as f:
 
 cookies={
         'security' : security,
-        'PHPSESSID' : 'hqkarbdj6vi8gn3gvier9m6qf7'
+        'PHPSESSID' : 'a0bnlpoocngmkkbcls16s0hnj0'
         }
 
 #Creates a payload for each password in the list

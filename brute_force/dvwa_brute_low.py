@@ -6,7 +6,7 @@
 import requests
 
 security="low"
-PHPSessionID='9no6gmk1eqr2dps9lccqic71t5'
+PHPSessionID='a0bnlpoocngmkkbcls16s0hnj0'
 password_file="/tmp/fasttrack.txt"
 url='http://192.168.1.163:8082/vulnerabilities/brute/'
 
